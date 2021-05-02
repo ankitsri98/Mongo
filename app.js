@@ -12,7 +12,7 @@ console.log(db);
 // Connect to MongoDB
 mongoose.connect("mongodb+srv://ankit034:ankitsrivastava98@cluster0.lwn5a.mongodb.net/grocerydb?retryWrites=true&w=majority", { useNewUrlParser: true });
 
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 
 // Initialize Express
 var app = express();
