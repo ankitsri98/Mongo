@@ -7,7 +7,7 @@ var Schema = mongoose.Schema;
 var ProductSchema = new Schema({
   full_name: {
     type: String,
-    ref:"Review"
+    required: true
   },
   email: {
     type: String,
