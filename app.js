@@ -27,6 +27,11 @@ app.set('view engine','ejs');
 // Make public static folder
 app.use(express.static("public"));
 
+app.get("/", function(req, res) {
+  res.render('welcome');
+});
+
+
 app.get("/first", function(req,res) {
   db.Product.find().then((results)=>{
     res.render('first',{pro: results});
@@ -128,9 +133,6 @@ app.post("/pro", async function(req, res) {
 });*/
 
 // Home route. Currently just to make sure app is running returns hello message.
-app.get("/", function(req, res) {
-  res.render('welcome');
-});
 
 
 // Start the server
