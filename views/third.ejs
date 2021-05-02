@@ -1,0 +1,27 @@
+<body>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>TEAM_NAME</th>
+        <th>FULL_NAME</th>
+        <th>EMAIL</th>
+        <th>NUMBER</th>
+        <th>CITY</th>
+        <th>URL</th>
+        
+      </tr>
+    </thead>
+    <% pro.forEach(x => { %>
+      <tr>
+        <td><%= x.team_name %></td>
+        <td><%= x.full_name %></td>
+        <td><%= x.email %></td>
+        <td><%= x.number %></td>
+        <td><%= x.city %></td>
+        <td><%= x.url %></td>
+      </tr>
+      <% }) %>
+  </table>
+</body>
+
+
