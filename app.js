@@ -49,7 +49,7 @@ app.get("/second", function(req,res) {
   })
 });
 // Routes for testing on postman
-app.get("/products", function(req,res) {
+/*app.get("/products", function(req,res) {
   db.Product.find({})
   .then(function(dbProducts) {
     res.json(dbProducts);
@@ -68,7 +68,7 @@ app.get("/reviews", function(req,res) {
     res.json(err);
   })
 });
-
+*/
 app.get("/third", function(req,res) {
   console.log("froms erver");
   pr.aggregate([{
@@ -90,7 +90,7 @@ app.get("/third", function(req,res) {
 )});
 // Route for creating a new Product
 
-app.post("/product", async function(req, res) {
+/*app.post("/product", async function(req, res) {
   var x=req.body;
   await x.forEach((y)=>{
     db.Product.create(y)
@@ -119,7 +119,7 @@ app.post("/pro", async function(req, res) {
     });
   }).catch(error => { throw error});
   
-});
+});*/
 /*app.post("/product", function(req, res) {
   db.Product.create(req.body)
     .then(function(dbProduct) {
