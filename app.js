@@ -43,7 +43,7 @@ app.get("/second", function(req,res) {
     console.log(err);
   })
 });
-// Routes
+// Routes for testing on postman
 app.get("/products", function(req,res) {
   db.Product.find({})
   .then(function(dbProducts) {
@@ -86,23 +86,55 @@ app.get("/reviews", function(req,res) {
   }
 )});*/
 
+/*app.get("/rev", function(req,res) {
+    pr
+  .find()
+  .populate("review")
+  .exec(function(err, users) {
+    console.log(users);
+    res.json(users);
+  });  
+});*/
+/*async.waterfall(
+  [
+      function(callback) {
+        pr.find({},{ "_id": 1 },callback);
+      },
+      function(students,callback) {
+          re.find({
+              "email": { "$in": students.map(function(el) {
+                  return el._id
+              })
+          },callback);
+      }
+  ],
+  function(err,results) {
+     if (err) {
+        res.send(err);
+     } else {
+        res.json(results);
+     }
+    }*/
+    
 app.get("/rev", function(req,res) {
-  pr.aggregate([{$match:{"full_name":"Udale Gelardi"}},{     $lookup: {         
-    from: "re",         
-    localField: "full_name",         
-    foreignField: "full_name",         
-    as: "ankit"     } }, 
-    {     $unwind: "$ankit" },
-    {$project:{"full_name":1,"email":1,"city":1,"url":1,"team_name":"$ankit.team_name"}}],
-    function( err, data ) {
-
-      if ( err )
-        throw err;
-  
-      console.log( JSON.stringify( data, undefined, 2 ) );
-  
+  console.log("froms erver");
+  pr.aggregate([{
+    $lookup: {
+        from: "reviews",
+        localField: "full_name",
+        foreignField: "full_name",
+        as: "ankit"
     }
-  )});
+}, {     $unwind: "$ankit" },{$project:{"_id":0,"full_name":1,"number":1,"email":1,"city":1,"url":1,"team_name":"$ankit.team_name"}}],function( err, data ) {
+
+    if ( err )
+      throw err;
+    //res.render('third',{pro:data});
+    res.json(data);
+    console.log( JSON.stringify( data, undefined, 2 ) );
+
+  }
+)});
 // Route for creating a new Product
 
 app.post("/product", async function(req, res) {
