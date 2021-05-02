@@ -48,27 +48,7 @@ app.get("/second", function(req,res) {
     console.log(err);
   })
 });
-// Routes for testing on postman
-/*app.get("/products", function(req,res) {
-  db.Product.find({})
-  .then(function(dbProducts) {
-    res.json(dbProducts);
-  })
-  .catch(function(err) {
-    res.json(err);
-  })
-});
-// Route to get all reviews
-app.get("/reviews", function(req,res) {
-  db.Review.find({})
-  .then(function(dbReviews) {
-    res.json(dbReviews);
-  })
-  .catch(function(err) {
-    res.json(err);
-  })
-});
-*/
+
 app.get("/third", function(req,res) {
   console.log("froms erver");
   pr.aggregate([{
@@ -88,52 +68,6 @@ app.get("/third", function(req,res) {
 
   }
 )});
-// Route for creating a new Product
-
-/*app.post("/product", async function(req, res) {
-  var x=req.body;
-  await x.forEach((y)=>{
-    db.Product.create(y)
-    .then(function(dbProduct) {
-      // If we were able to successfully create a Product, send it back to the client
-      res.json(dbProduct);
-    })
-    .catch(function(err) {
-      // If an error occurred, send it to the client
-      res.json(err);
-    });
-  }).catch(error => { throw error});
-  
-});
-app.post("/pro", async function(req, res) {
-  var x=req.body;
-  await x.forEach((y)=>{
-    db.Review.create(y)
-    .then(function(dbProduct) {
-      // If we were able to successfully create a Product, send it back to the client
-      res.json(dbProduct);
-    })
-    .catch(function(err) {
-      // If an error occurred, send it to the client
-      res.json(err);
-    });
-  }).catch(error => { throw error});
-  
-});*/
-/*app.post("/product", function(req, res) {
-  db.Product.create(req.body)
-    .then(function(dbProduct) {
-      // If we were able to successfully create a Product, send it back to the client
-      res.json(dbProduct);
-    })
-    .catch(function(err) {
-      // If an error occurred, send it to the client
-      res.json(err);
-    });
-});*/
-
-// Home route. Currently just to make sure app is running returns hello message.
-
 
 // Start the server
 app.listen(PORT, function() {
