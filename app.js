@@ -1,7 +1,7 @@
 var express = require("express");
 var mongoose = require("mongoose");
 bodyParser = require('body-parser')
-
+const expressLayouts = require('express-ejs-layouts');
 // Require all models
 var db = require("./models");
 
@@ -21,9 +21,28 @@ var app = express();
 app.use(bodyParser.json({limit: '50mb', extended: true}))
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}))
 
+app.use(expressLayouts);
+app.set('view engine','ejs');
+
 // Make public static folder
 app.use(express.static("public"));
 
+app.get("/first", function(req,res) {
+  db.Product.find().then((results)=>{
+    res.render('first',{pro: results});
+  })
+  .catch((err)=>{
+    console.log(err);
+  })
+});
+app.get("/second", function(req,res) {
+  db.Review.find().then((results)=>{
+    res.render('second',{pro: results});
+  })
+  .catch((err)=>{
+    console.log(err);
+  })
+});
 // Routes
 app.get("/products", function(req,res) {
   db.Product.find({})
@@ -74,16 +93,16 @@ app.get("/rev", function(req,res) {
     foreignField: "full_name",         
     as: "ankit"     } }, 
     {     $unwind: "$ankit" },
-    {$project:{"full_name":1,"email":1,"city":1,"url":1,"team_name":"$ankit.team_name"}}])
-  .then(function(dbReviews) {
-    console.log(pr);
-    console.log(dbReviews);
-    res.json(dbReviews);
-  })
-  .catch(function(err) {
-    res.json(err);
-  })
-});
+    {$project:{"full_name":1,"email":1,"city":1,"url":1,"team_name":"$ankit.team_name"}}],
+    function( err, data ) {
+
+      if ( err )
+        throw err;
+  
+      console.log( JSON.stringify( data, undefined, 2 ) );
+  
+    }
+  )});
 // Route for creating a new Product
 
 app.post("/product", async function(req, res) {
@@ -130,7 +149,7 @@ app.post("/pro", async function(req, res) {
 
 // Home route. Currently just to make sure app is running returns hello message.
 app.get("/", function(req, res) {
-  res.send("Hello from demo app!");
+  res.render('welcome');
 });
 
 
